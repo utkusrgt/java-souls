@@ -3,24 +3,33 @@ package JavaSouls;
 public abstract class  Warior {
     private int id;
     private String charName;
-    private int damage;
+    private int charDamage;
     private int health;
-    private int money;
+    private int charMoney;
 
     public Warior(int id, String charName,int damage, int health, int money) {
-        this.damage = damage;
+        this.charDamage = damage;
         this.health = health;
-        this.money = money;
+        this.charMoney = money;
         this.charName = charName;
         this.id = id;
     }
 
-    public int getDamage() {
-        return damage;
+
+    public int getCharDamage() {
+        return charDamage;
     }
 
-    public void setDamage(int damage) {
-        this.damage = damage;
+    public void setCharDamage(int charDamage) {
+        this.charDamage = charDamage;
+    }
+
+    public int getCharMoney() {
+        return charMoney;
+    }
+
+    public void setCharMoney(int charMoney) {
+        this.charMoney = charMoney;
     }
 
     public int getHealth() {
@@ -29,14 +38,6 @@ public abstract class  Warior {
 
     public void setHealth(int health) {
         this.health = health;
-    }
-
-    public int getMoney() {
-        return money;
-    }
-
-    public void setMoney(int money) {
-        this.money = money;
     }
 
     public String getCharName() {
