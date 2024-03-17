@@ -8,36 +8,39 @@ public class ToolStore extends NormalLocation {
     @Override
     public boolean onLocation() {
         System.out.println("Welcome Traveler");
-        System.out.println("Current money : " + this.getPlayer().getMoney());
-        System.out.println();
-        System.out.println("1 - Weapons");
-        System.out.println();
-        System.out.println("2 - Armor");
-        System.out.println();
-        System.out.println("3 - Exit");
-        System.out.println();
-        int selectCase = inp.nextInt();
-        while (selectCase < 1 || selectCase > 3) {
-            System.out.println("Invalid Option");
-            selectCase = inp.nextInt();
-        }
-        switch (selectCase) {
-            case 1:
-                printWeapon();
-                buyWeapon();
-                break;
-            case 2:
-                printArmor();
-                buyArmor();
-            case 3:
-                return true;
+        boolean showMenu = true;
+        while (showMenu) {
+            System.out.println("Current money : " + this.getPlayer().getMoney());
+            System.out.println();
+            System.out.println("1 - Weapons");
+            System.out.println();
+            System.out.println("2 - Armor");
+            System.out.println();
+            System.out.println("3 - Exit");
+            System.out.println();
+            int selectCase = inp.nextInt();
+            while (selectCase < 1 || selectCase > 3) {
+                System.out.println("Invalid Option");
+                selectCase = inp.nextInt();
+            }
+            switch (selectCase) {
+                case 1:
+                    printWeapon();
+                    buyWeapon();
+                    break;
+                case 2:
+                    printArmor();
+                    buyArmor();
+                case 3:
+                    System.out.println("Exiting...");
+                    showMenu = false;
+                    break;
+            }
+
 
         }
-
         return true;
     }
-
-
 
     public void printWeapon() {
         System.out.println("Weapons");
@@ -50,33 +53,37 @@ public class ToolStore extends NormalLocation {
                     "\t Damage : " + w.getDamage() +
                     "\t Price : " + w.getPrice());
         }
+        System.out.println("0  - Exit");
     }
 
     public void buyWeapon(){
 
         System.out.println("Select Weapon");
         int selectWeponID = inp.nextInt();
-        while (selectWeponID < 1 || selectWeponID > Weapons.weapons().length) {
+        while (selectWeponID < 0 || selectWeponID > Weapons.weapons().length) {
             System.out.println("Invalid Option");
             selectWeponID = inp.nextInt();
         }
-        Weapons selectedWeapon = Weapons.getWeaponByObjID(selectWeponID);
 
-        if (selectedWeapon != null) {
+        if(selectWeponID != 0 ){
+            Weapons selectedWeapon = Weapons.getWeaponByObjID(selectWeponID);
 
-            if (selectedWeapon.getPrice() > this.getPlayer().getMoney()) {
-                System.out.println("Insufficent resource !");
-            } else {
-                System.out.println(selectedWeapon.getName() + " is bought!");
-                int balance = this.getPlayer().getMoney() - selectedWeapon.getPrice();
-                this.getPlayer().setMoney(balance);
-                System.out.println("Money left : " + this.getPlayer().getMoney());
-                this.getPlayer().getInventory().setWeapons(selectedWeapon);
+            if (selectedWeapon != null) {
 
+                if (selectedWeapon.getPrice() > this.getPlayer().getMoney()) {
+                    System.out.println("Insufficent resource !");
+                } else {
+                    System.out.println(selectedWeapon.getName() + " is bought!");
+                    int balance = this.getPlayer().getMoney() - selectedWeapon.getPrice();
+                    this.getPlayer().setMoney(balance);
+                    System.out.println("Money left : " + this.getPlayer().getMoney());
+                    this.getPlayer().getInventory().setWeapons(selectedWeapon);
+
+                }
             }
 
-
         }
+
     }
 
     private void printArmor() {
@@ -87,9 +94,10 @@ public class ToolStore extends NormalLocation {
         for (Armor a : Armor.armors()) {
             System.out.println("ID : " + a.getId() +
                     "\t Name : " + a.getName() +
-                    "\t Damage : " + a.getHealth() +
+                    "\t Damage : " + a.getBlock() +
                     "\t Price : " + a.getPrice());
         }
+        System.out.println("0 - Exit");
     }
 
     public void buyArmor(){
@@ -100,22 +108,24 @@ public class ToolStore extends NormalLocation {
             System.out.println("Invalid Option");
             selectArmorID = inp.nextInt();
         }
-        Armor selectedArmor = Armor.getArmorByObjID(selectArmorID);
+        if ((selectArmorID !=0)){
+            Armor selectedArmor = Armor.getArmorByObjID(selectArmorID);
 
-        if (selectedArmor != null) {
+            if (selectedArmor != null) {
 
-            if (selectedArmor.getPrice() > this.getPlayer().getMoney()) {
-                System.out.println("Insufficent resource !");
-            } else {
-                System.out.println(selectedArmor.getName() + " is bought!");
-                int balance = this.getPlayer().getMoney() - selectedArmor.getPrice();
-                this.getPlayer().setMoney(balance);
-                System.out.println("Money left : " + this.getPlayer().getMoney());
-                this.getPlayer().getInventory().setArmors(selectedArmor);
+                if (selectedArmor.getPrice() > this.getPlayer().getMoney()) {
+                    System.out.println("Insufficent resource !");
+                } else {
+                    System.out.println(selectedArmor.getName() + " is bought!");
+                    int balance = this.getPlayer().getMoney() - selectedArmor.getPrice();
+                    this.getPlayer().setMoney(balance);
+                    this.getPlayer().getInventory().setArmors(selectedArmor);
+                    System.out.println("Money left : " + this.getPlayer().getMoney());
+
+                }
 
             }
-
-
         }
+
     }
 }

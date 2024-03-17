@@ -31,32 +31,47 @@ public class Game {
             System.out.println();
             System.out.println("Locations");
             System.out.println();
-            Location[] locationList = {new SafeHouse(player1), new ToolStore(player1)};
+            Location[] locationList = {new SafeHouse(player1), new ToolStore(player1), new Cave(player1), new Forest(player1), new River(player1)};
             for (Location locations : locationList) {
 
                 System.out.println(locations.getId() +
                         "\t" + locations.getName());
                 System.out.println();
 
-
             }
+            System.out.println("0   Exit Game");
             System.out.print("Please select a location: ");
 
             int selectLoc = input.nextInt();
 
             switch (selectLoc) {
+                case 0:
+                    location = null;
+                    break;
                 case 1:
                     location = new SafeHouse(player1);
                     break;
                 case 2:
                     location = new ToolStore(player1);
                     break;
+                case 3:
+                    location = new Cave(player1);
+                    break;
+                case 4:
+                    location = new Forest(player1);
+                    break;
+                case 5:
+                    location = new River(player1);
+                    break;
                 default:
                     location = new SafeHouse(player1);
 
             }
 
-
+            if(location == null){
+                System.out.println("Exiting from the game");
+                break;
+            }
             if(!location.onLocation()){
                 System.out.println("You Died");
             }

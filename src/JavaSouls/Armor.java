@@ -3,13 +3,13 @@ package JavaSouls;
 public class Armor {
     private int id;
     private String name;
-    private int health;
+    private int block;
     private int price;
 
-    public Armor(int id, String name, int health, int price) {
+    public Armor(int id, String name, int block, int price) {
         this.id = id;
         this.name = name;
-        this.health = health;
+        this.block = block;
         this.price = price;
     }
 
@@ -45,12 +45,12 @@ public class Armor {
         this.name = name;
     }
 
-    public int getHealth() {
-        return health;
+    public int getBlock() {
+        return block;
     }
 
-    public void setHealth(int health) {
-        this.health = health;
+    public void setBlock(int block) {
+        this.block = block;
     }
 
     public int getPrice() {
