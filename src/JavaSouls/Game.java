@@ -12,7 +12,7 @@ public class Game {
         System.out.print("Please enter your name : ");
         //System.out.println("Please select difficulty");       //Future update
         String playerName = input.nextLine();
-        Player player1 = new Player(playerName);
+        Player player1 = new Player(playerName, 4);
         System.out.println(player1.getName() + " Welcome to the Java Souls");
         System.out.println();
         System.out.println("Available Travelers");
@@ -22,7 +22,8 @@ public class Game {
         player1.selectChar();
 
 
-        Location location =null;
+
+        Location location;
         while (true) {
             System.out.println();
             player1.playerInfo();
@@ -31,7 +32,7 @@ public class Game {
             System.out.println();
             System.out.println("Locations");
             System.out.println();
-            Location[] locationList = {new SafeHouse(player1), new ToolStore(player1), new Cave(player1), new Forest(player1), new River(player1)};
+            Location[] locationList = {new SafeHouse(player1), new ToolStore(player1), new Cave(player1), new Forest(player1), new River(player1), new Mines(player1)};
             for (Location locations : locationList) {
 
                 System.out.println(locations.getId() +
@@ -63,6 +64,9 @@ public class Game {
                 case 5:
                     location = new River(player1);
                     break;
+                case 6:
+                    location = new Mines(player1);
+                    break;
                 default:
                     location = new SafeHouse(player1);
 
@@ -73,7 +77,8 @@ public class Game {
                 break;
             }
             if(!location.onLocation()){
-                System.out.println("You Died");
+                System.out.println("GAME OVER");
+                break;
             }
 
         }

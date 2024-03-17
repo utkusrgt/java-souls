@@ -16,10 +16,10 @@ public class ToolStore extends NormalLocation {
             System.out.println();
             System.out.println("2 - Armor");
             System.out.println();
-            System.out.println("3 - Exit");
+            System.out.println("0 - Exit");
             System.out.println();
             int selectCase = inp.nextInt();
-            while (selectCase < 1 || selectCase > 3) {
+            while (selectCase < -1 || selectCase > 3) {
                 System.out.println("Invalid Option");
                 selectCase = inp.nextInt();
             }
@@ -31,7 +31,8 @@ public class ToolStore extends NormalLocation {
                 case 2:
                     printArmor();
                     buyArmor();
-                case 3:
+                    break;
+                case 0:
                     System.out.println("Exiting...");
                     showMenu = false;
                     break;

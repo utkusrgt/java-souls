@@ -1,5 +1,5 @@
 package JavaSouls;
-
+import java.util.Arrays;
 import java.util.Locale;
 import java.util.Random;
 
@@ -7,12 +7,17 @@ public abstract  class BattleLoc extends Location{
     private Obstacle obstacle;
     private String award;
     private int maxObstacle;
+
+
     public BattleLoc(int id,Player player, String name, Obstacle obstacle, String award, int maxObstacle) {
         super(id, player, name);
         this.obstacle = obstacle;
         this.award = award;
         this.maxObstacle = maxObstacle;
+
     }
+
+
 
     @Override
     public boolean onLocation() {
@@ -23,17 +28,22 @@ public abstract  class BattleLoc extends Location{
         System.out.println(obsNumber + " " + this.getObstacle().getName() + " lives here");
         System.out.println("<F>ight or <R>un");
         String selectAction = inp.nextLine();
-        if (selectAction.equalsIgnoreCase("f")){
-            System.out.println("Ready for fight");
-            if (combat(obsNumber)){
-                System.out.println("Victory Achived");
+        if (selectAction.equalsIgnoreCase("f") && combat(obsNumber)){
+            System.out.println();
+            System.out.println("Victory Achived");
+            getPlayer().addItemToInventory(getObstacle().getItem());
+            System.out.println("You have received " + this.getAward());
+            if(getPlayer().getBag().hasAllItems()){
+                System.out.println("Congratulations! You have collected all items, please go the Round Table");
                 return true;
             }
 
 
+
+            return true;
         }
 
-        if(this.getPlayer().getHealth() < 0){
+        if(this.getPlayer().getHealth() <= 0){
             System.out.println("You Died !");
             return false;
         }
@@ -109,6 +119,16 @@ public abstract  class BattleLoc extends Location{
         Random r = new Random();
         return r.nextInt(this.getMaxObstacle()) + 1;
     }
+
+    public void addItemToBag(String item) {
+        this.getPlayer().getBag().addItem(item);
+    }
+    public boolean hasAllItems() {
+        return this.getPlayer().getBag().hasAllItems();
+    }
+
+
+
 
     public Obstacle getObstacle() {
         return obstacle;

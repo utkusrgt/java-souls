@@ -5,16 +5,19 @@ public class Obstacle {
     private String name;
     private int damage;
     private int health;
+    private String item;
     private int award;
     private int defHealth;
 
-    public Obstacle(int id, String name, int damage, int health, int award, int defHealth) {
+    public Obstacle(int id, String name, int damage, int health, int award, String item, int defHealth) {
         this.id = id;
         this.name = name;
         this.damage = damage;
         this.health = health;
         this.defHealth = defHealth;
         this.award = award;
+        this.item = item;
+
 
 
     }
@@ -68,5 +71,13 @@ public class Obstacle {
 
     public void setDefHealth(int defHealth) {
         this.defHealth = defHealth;
+    }
+
+    public String getItem() {
+        return item;
+    }
+
+    public void setItem(String item) {
+        this.item = item;
     }
 }

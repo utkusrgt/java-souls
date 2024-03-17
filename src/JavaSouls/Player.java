@@ -5,19 +5,27 @@ import java.util.Scanner;
 public class Player {
     private int damage;
     private int health;
+    private int defhealt;
     private int money;
     private String name;
     private String charName;
     private Scanner inp = new Scanner(System.in);
-
     private Inventory inventory;
+    private Bag bag;
 
-    public Player(String name) {
+    public Player(String name, int bagSize) {
 
         this.name = name;
         this.inventory = new Inventory();
+        this.bag = new Bag(3);
+
 
     }
+
+    public void addItemToInventory(String item) {
+        bag.addItem(item);
+    }
+
 
     public void selectChar(){                                           //Charachter Selection
 
@@ -52,9 +60,12 @@ public class Player {
 
     }
 
+
+
     public void initPlayer(Warior warior){                              //Player Initialize
         this.setDamage(warior.getCharDamage());
         this.setHealth(warior.getHealth());
+        this.setDefhealt(warior.getHealth());
         this.setMoney(warior.getCharMoney());
         this.setName(warior.getCharName());
 
@@ -92,6 +103,9 @@ public class Player {
     }
 
     public void setHealth(int health) {
+        if(health < 0){
+            health = 0;
+        }
         this.health = health;
     }
 
@@ -113,5 +127,21 @@ public class Player {
 
     public void setInventory(Inventory inventory) {
         this.inventory = inventory;
+    }
+
+    public int getDefhealt() {
+        return defhealt;
+    }
+
+    public void setDefhealt(int defhealt) {
+        this.defhealt = defhealt;
+    }
+
+    public Bag getBag() {
+        return bag;
+    }
+
+    public void setBag(Bag bag) {
+        this.bag = bag;
     }
 }

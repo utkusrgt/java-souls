@@ -4,9 +4,11 @@ public class Inventory {
     private Weapons weapons;
     private Armor armors;
 
+
     public Inventory() {
         this.weapons = new Weapons(-1, "Fist", 0, 0);
         this.armors = new Armor(-1,"No Armor", 0, 0 );
+
     }
 
     public Weapons getWeapons() {
@@ -24,4 +26,7 @@ public class Inventory {
     public void setArmors(Armor armors) {
         this.armors = armors;
     }
+
+
 }
+
